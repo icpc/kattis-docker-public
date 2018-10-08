@@ -22,11 +22,11 @@ On windows, there is "docker quickstart" that pops a command line tool that seem
 
 ## Use
 
-After setup, `. context` in the root project should set your path.
+After setup, **NOTICE THE DOT** `. context` in project will set your path, while `. uncontext` resets it.
 
 After this, the dev tools,
 
-`git`,`make`,`g++`,`gcc`,`java`,`javac`,`python`,`python3`, `kotlin`, `kotlinc`
+`make`,`g++`,`gcc`,`java`,`javac`,`python`,`python3`, `kotlin`, `kotlinc`
 
 the latex tools,
 
