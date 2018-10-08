@@ -1,0 +1,16 @@
+#!/bin/bash
+ok=true
+for test in $(find . -perm +111 -type f -iname  '[a-z0-9]*[a-z0-9]' -depth 1)
+do
+  if [ "$test" = "./all" ] ; then continue; fi
+  if ! $test
+  then
+    ok=false
+  fi
+done
+if [ "$ok" = "true" ]
+then
+  echo "all tests passed"
+else
+  echo "some tests failed"
+fi
