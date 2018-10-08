@@ -1,0 +1,29 @@
+#/bin/bash
+
+GXX_VERSION=7.3.0
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+test_dir="$PWD"
+popd >/dev/null
+
+#mktemp is not compatible with OSX / docker so...
+TAG=$(bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1)
+TMPDIR="$test_dir/tmp/$TAG"
+mkdir -p "$TMPDIR"
+
+function cleanup {
+  /bin/rm -rf "$TMPDIR"
+}
+trap cleanup EXIT
+
+cp "$test_dir/compile/Makefile" $TMPDIR
+cp "$test_dir/compile/g++-test.cpp" $TMPDIR
+
+cd $TMPDIR
+if "$test_dir/../bin/kattis-docker" /bin/bash -c "make g++-test && ./g++-test" | grep v${GXX_VERSION}
+then
+        echo ok
+        exit 0
+else
+        exit 1
+fi
