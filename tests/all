@@ -1,4 +1,11 @@
 #!/bin/bash
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+test_dir="$PWD"
+popd >/dev/null
+
+cd $test_dir
+
 ok=true
 for test in $(find . -perm +111 -type f -iname  '[a-z0-9]*[a-z0-9]' -depth 1)
 do
