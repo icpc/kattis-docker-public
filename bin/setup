@@ -1,0 +1,46 @@
+#!/bin/bash
+
+get_script_dir () {
+    pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+    pwd
+    popd >/dev/null
+}
+
+THIS_DIR="$(get_script_dir)"
+BASE_DIR="$(dirname "$THIS_DIR")"
+BASE_NAME="$(basename "$BASE_DIR")"
+base_name="$(echo $BASE_NAME | tr ' [:upper:]' '_[:lower:]')"
+
+commands () {
+    local container="$1"
+    local command=""
+    shift
+    pushd "$BASE_DIR/bin" > /dev/null
+    for command in "$@"
+    do
+        recommand=${command//+/\\+}        
+        /bin/rm -rf "$command"
+        ln -s "$container-command" "$command"
+        chmod +x "$command"
+        if ! egrep -q "^$recommand"'$' .gitignore
+        then
+            echo "$command" >> .gitignore
+        fi
+    done
+    popd > /dev/null
+}
+
+
+if ! which docker > /dev/null
+then
+    echo "you must install docker..."
+    exit 1
+fi
+
+docker build -t icpc/kattis:latest "$BASE_DIR/dockers/kattis"
+commands kattis py3clean py3compile py3versions pybuild pyclean pycompile pydoc pydoc3 pygettext pygettext3 pypy pypyclean pypycompile pytest python python-config python2 python2-config python3 pyversions
+commands kattis c++ g++ cc gcc ld ranlib ar as nm make cmake
+commands kattis java javac jar
+commands kattis pdflatex ghostscript gs problem2html  problem2pdf verifyproblem
+commands kattis kotlin kotlinc kotlin-dce-js kotlinc-js kotlinc-jvm
+echo "Type ". ./context" in the project base directory ($BASE_DIR) to set your PATH"

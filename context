@@ -1,0 +1,17 @@
+# find directory of this sourced context
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+kattis_docker_bin="$PWD/bin"
+popd >/dev/null
+
+# remove directory from path
+PATH=":$PATH:"
+while [ "${PATH/:$kattis_docker_bin:/:}" != "$PATH" ] ; do PATH="${PATH/:$kattis_docker_bin:/:}"; done
+
+# place directory first
+PATH="$kattis_docker_bin${PATH%:}"
+
+# invalidate cache
+hash -r
+
+
