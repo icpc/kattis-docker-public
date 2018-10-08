@@ -7,9 +7,10 @@ popd >/dev/null
 cd $test_dir
 
 ok=true
-for test in $(find . -perm +111 -type f -iname  '[a-z0-9]*[a-z0-9]' -depth 1)
+for test in $(find . -perm +111 -type f -iname  '[a-z0-9]*[^-~#]' -depth 1)
 do
   if [ "$test" = "./all" ] ; then continue; fi
+  echo $test
   if ! $test
   then
     ok=false
