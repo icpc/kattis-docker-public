@@ -21,5 +21,9 @@ LDFLAGS=-lm
 		PKG=$$(egrep '^[ 	]*package [-a-z.0-9]+' $< | head -1 | sed -e 's/.*package[ 	]*\([a-z0-9.]*\).*/\1/') && echo "#!/bin/sh\njava $(JAVAFLAGS) -cp . $$PKG.$*" >$@ && chmod +x $@ ; \
 	fi
 
+% : %.py
+	cp $< $@
+	chmod +x $@
+
 %.out : % %.in
 	./$* < $*.in > $*.out
