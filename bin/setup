@@ -37,7 +37,12 @@ then
     exit 1
 fi
 
-docker build -t icpc/kattis:latest "$BASE_DIR/dockers/kattis"
+if [ "$1" != "--build" ]
+then
+    docker pull icpc/kattis:latest
+else
+    docker build -t icpc/kattis:latest "$BASE_DIR/dockers/kattis"
+fi
 commands kattis py3clean py3compile py3versions pybuild pyclean pycompile pydoc pydoc3 pygettext pygettext3 pypy pypyclean pypycompile pytest python python-config python2 python2-config python3 pyversions
 commands kattis c++ g++ cc gcc ld ranlib ar as nm make cmake
 commands kattis java javac jar
