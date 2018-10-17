@@ -16,6 +16,16 @@ function cleanup {
 }
 trap cleanup EXIT
 
+curl -o $TMPDIR/help.html https://open.kattis.com/help/c
+if !  grep ${GCC_VERSION} $TMPDIR/help.html >/dev/null
+then
+  echo "gcc ${GCC_VERSION} is not the documented version."
+  grep -A 3 "Compiler settings" $TMPDIR/help.html
+  exit 1
+else
+  echo "version ${GCC_VERSION} match."
+fi
+
 cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/gcc-test.c" $TMPDIR
 
