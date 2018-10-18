@@ -1,6 +1,6 @@
 #/bin/bash
 
-KOTLIN_VERSION=null
+KOTLIN_VERSION=1.1.4
 
 pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
 test_dir="$PWD"
@@ -15,6 +15,17 @@ function cleanup {
   /bin/rm -rf "$TMPDIR"
 }
 trap cleanup EXIT
+
+curl -o $TMPDIR/help.html https://open.kattis.com/help/kotlin
+if !  grep ${KOTLIN_VERSION} $TMPDIR/help.html >/dev/null
+then
+  echo "gcc ${KOTLIN_VERSION} is not the documented version."
+  grep -A 3 "Compiler settings" $TMPDIR/help.html
+  exit 1
+else
+  echo "version ${KOTLIN_VERSION} match."
+fi
+
 
 cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/KotlinTest.kt" $TMPDIR
