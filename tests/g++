@@ -1,6 +1,6 @@
 #/bin/bash
 
-GCC_VERSION=$(make -C compile GXX_VERSION)
+GXX_VERSION=$(make -C compile GXX_VERSION)
 
 pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
 test_dir="$PWD"
