@@ -1,6 +1,6 @@
 #/bin/bash
 
-KOTLIN_VERSION=1.1.4
+KOTLIN_VERSION=$(make -C compile KOTLIN_VERSION)
 
 pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
 test_dir="$PWD"
@@ -19,7 +19,7 @@ trap cleanup EXIT
 curl -o $TMPDIR/help.html https://open.kattis.com/help/kotlin
 if !  grep ${KOTLIN_VERSION} $TMPDIR/help.html >/dev/null
 then
-  echo "gcc ${KOTLIN_VERSION} is not the documented version."
+  echo "kotlin ${KOTLIN_VERSION} is not the documented version."
   grep -A 3 "Compiler settings" $TMPDIR/help.html
   exit 1
 else
