@@ -12,26 +12,8 @@ PYTHON3_VERSION=3.6
 PYTHON_VERSION=2.7
 PYPY_VERSION=5.10
 
-GCC_VERSION:
-	@echo $(GCC_VERSION)
-
-GXX_VERSION:
-	@echo $(GXX_VERSION)
-
-JAVA_VERSION:
-	@echo $(JAVA_VERSION)
-
-PYTHON_VERSION:
-	@echo $(PYTHON_VERSION)
-
-PYTHON3_VERSION:
-	@echo $(PYTHON3_VERSION)
-
-PYPY_VERSION:
-	@echo $(PYPY_VERSION)
-
-KOTLIN_VERSION:
-	@echo $(KOTLIN_VERSION)
+null:
+	@echo ""
 
 % : %.c
 	$(CC) -o $@ $(CFLAGS) $< $(LDFLAGS)
@@ -51,11 +33,11 @@ KOTLIN_VERSION:
 	fi
 
 % : %.kt
-	/usr/local/kotlin-$(KOTLIN_VERSION)/kotlinc/bin/kotlinc -d . $<
+	kotlinc -d . $<
 	if ! egrep ^package $< ; then \
-		echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlin-$(KOTLIN_VERSION)/kotlinc/lib/*:.' $*Kt" >$@ && chmod +x $@ ; \
+		echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlinc/lib/*:.' $*Kt" >$@ && chmod +x $@ ; \
 	else \
-		PKG=$$(egrep '^[ 	]*package [-a-z.0-9]+' $< | head -1 | sed -e 's/.*package[ 	]*\([a-z0-9.]*\).*/\1/') && echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlin-$(KOTLIN_VERSION)/kotlinc/lib/*:.' $$PKG.$*Kt" >$@ && chmod +x $@ ; \
+		PKG=$$(egrep '^[ 	]*package [-a-z.0-9]+' $< | head -1 | sed -e 's/.*package[ 	]*\([a-z0-9.]*\).*/\1/') && echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlinc/lib/*:.' $$PKG.$*Kt" >$@ && chmod +x $@ ; \
 	fi
 
 % : %.py
