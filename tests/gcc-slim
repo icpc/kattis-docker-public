@@ -1,0 +1,29 @@
+#/bin/bash
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+test_dir="$PWD"
+popd >/dev/null
+
+#mktemp is not compatible with OSX / docker so...
+TAG=$(bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1)
+TMPDIR="$test_dir/tmp/$TAG"
+mkdir -p "$TMPDIR"
+
+function cleanup {
+  /bin/rm -rf "$TMPDIR"
+}
+trap cleanup EXIT
+
+GCC_VERSION=$(make -C "$test_dir/compile" GCC_VERSION)
+
+cp "$test_dir/compile/Makefile" $TMPDIR
+cp "$test_dir/compile/gcc-test.c" $TMPDIR
+
+cd $TMPDIR
+if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/gcc:latest /bin/bash -c "make gcc-test && ./gcc-test" | grep v${GCC_VERSION}
+then
+        echo ok
+        exit 0
+else
+        exit 1
+fi
