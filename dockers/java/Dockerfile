@@ -11,6 +11,8 @@ FROM openjdk:8u181-slim
 COPY --from=0 /tmp/kotlinc /usr/local/kotlinc
 RUN cd /usr/local/bin && ln -s ../kotlinc/bin/* .
 
+RUN apt-get update && apt-get install -y make
+
 WORKDIR /usr/src/myapp
 VOLUME /usr/src/myapp
 

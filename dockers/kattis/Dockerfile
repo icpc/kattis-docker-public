@@ -48,8 +48,9 @@ RUN apt update && aptitude install -y \
 RUN apt install -y zip
 ENV KOTLIN_VERSION 1.1.4
 # newer installs
-# RUN mkdir -p /usr/local/kotlin-${KOTLIN_VERSION} && cd /usr/local/kotlin-${KOTLIN_VERSION} && curl -L -o kotlin-compiler-${KOTLIN_VERSION}-linux-x64.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}-linux-x64.zip && unzip kotlin-compiler-${KOTLIN_VERSION}-linux-x64.zip && cd /usr/local/bin && ln -s ../kotlin-${KOTLIN_VERSION}/kotlinc/bin/* .
-RUN mkdir -p /usr/local/kotlin-${KOTLIN_VERSION} && cd /usr/local/kotlin-${KOTLIN_VERSION} && curl -L -o kotlin-compiler-${KOTLIN_VERSION}.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && unzip kotlin-compiler-${KOTLIN_VERSION}.zip && cd /usr/local/bin && ln -s ../kotlin-${KOTLIN_VERSION}/kotlinc/bin/* .
+# RUN curl -L -o /tmp/kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}-linux-x64.zip && cd /usr/local && unzip /tmp/kotlinc.zip && cd /usr/local/bin && ln -s ../kotlinc/bin/* .
+
+RUN curl -L -o /tmp/kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && cd /usr/local && unzip /tmp/kotlinc.zip && cd /usr/local/bin && ln -s ../kotlinc/bin/* .
 
 # tex
 RUN apt update && aptitude install -y \
@@ -66,4 +67,5 @@ RUN mkdir -p /usr/local && cd /usr/local && git clone --recursive https://github
 RUN cd /usr/local/problemtools && make builddeb
 RUN dpkg -i /usr/local/kattis-problemtools_*.deb
 
-WORKDIR /home
+WORKDIR /usr/src/myapp
+VOLUME /usr/src/myapp
