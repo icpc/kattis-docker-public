@@ -1,0 +1,23 @@
+#/bin/bash
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+test_dir="$PWD"
+popd >/dev/null
+
+. "$test_dir/tools"
+
+
+mktmps TMPDIR
+mkvars JAVA_VERSION
+
+cp "$test_dir/compile/Makefile" $TMPDIR
+cp "$test_dir/compile/JavaTest.java" $TMPDIR
+
+cd $TMPDIR
+if "$test_dir/../bin/kattis-docker" /bin/bash -c "make JavaTest && ./JavaTest" | grep v${JAVA_VERSION}
+then
+        echo ok
+        exit 0
+else
+        exit 1
+fi
