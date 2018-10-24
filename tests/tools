@@ -1,0 +1,30 @@
+
+TMPDIRS=()
+
+function mktmps {
+    local var
+    for var in "$@"
+    do 
+      local TAG=$(bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1)
+      local TMP="$test_dir/tmp/$TAG"
+      mkdir -p "$TMP"
+      TMPDIRS+=("$TMP")
+      eval $var="$TMP"
+    done
+}
+
+function cleanup {
+  /bin/rm -rf "${TMPDIRS[@]}"
+}
+trap cleanup EXIT
+
+function mkvars {
+    local var
+    for var in "$@"
+    do
+      local value=$(make -C "$test_dir/compile" -p -n null | egrep "^$1 = " | sed -e "s/^$1 = //")
+      eval $var="$value"
+    done
+}
+
+

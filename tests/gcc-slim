@@ -4,17 +4,11 @@ pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
 test_dir="$PWD"
 popd >/dev/null
 
-#mktemp is not compatible with OSX / docker so...
-TAG=$(bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1)
-TMPDIR="$test_dir/tmp/$TAG"
-mkdir -p "$TMPDIR"
+. "$test_dir/tools"
 
-function cleanup {
-  /bin/rm -rf "$TMPDIR"
-}
-trap cleanup EXIT
 
-GCC_VERSION=$(make -C "$test_dir/compile" GCC_VERSION)
+mktmps TMPDIR
+mkvars GCC_VERSION
 
 cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/gcc-test.c" $TMPDIR
