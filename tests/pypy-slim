@@ -1,0 +1,22 @@
+#/bin/bash
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+test_dir="$PWD"
+popd >/dev/null
+
+. "$test_dir/tools"
+
+
+mktmps TMPDIR
+mkvars PYPY_VERSION
+
+cp "$test_dir/compile/Makefile" $TMPDIR
+cp "$test_dir/compile/pypy-test.py" $TMPDIR
+
+cd $TMPDIR
+if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/python:latest /bin/bash -c "make pypy-test && ./pypy-test" | grep v${PYPY_VERSION}
+then
+        echo ok
+else
+        exit 1
+fi
