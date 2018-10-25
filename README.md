@@ -73,8 +73,7 @@ python3-docker command args... # python3
 After setup
 
 ```bash
-cd tests
-./all
+tests/all
 ```
 
 should pass all tests (except the `*-kattis` tests with the slim setup).
