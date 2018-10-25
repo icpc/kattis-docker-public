@@ -22,7 +22,7 @@ function mkvars {
     local var
     for var in "$@"
     do
-      local value=$(make -C "$test_dir/compile" -p -n null | egrep "^$1 = " | sed -e "s/^$1 = //")
+      local value=$(cd "$test_dir/compile" && make -p -n null | egrep "^$1 = " | sed -e "s/^$1 = //")
       eval $var="$value"
     done
 }
