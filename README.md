@@ -71,7 +71,7 @@ will compile and run using the kattis toolchain.  After setting your `. context`
 
 ## Time
 
-Launching the docker adds time (about 1 second on my system) that is not part of time limits when being judged), so you should time inside the container:
+Launching the docker adds time (about 1 second on my system) that is not part of time limit when officially judged, so time inside the container:
 
 ```bash
 gcc-docker time ./gcc-test
