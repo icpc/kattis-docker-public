@@ -1,40 +1,54 @@
-# icpc/kattis
+<img align="right" src="kattis-docker.png">
 
-## Thanks!
+# Kattis in a Container
 
-If you are reading this you are planning to contribute as a judge.  The goal
-here is to make a common environment for judges to build problem sets that
-will work with the kattis online judge system.
+The same ICPC test/run/build configuration that kattis.com uses for problem solvers and problem makers.
 
-## Docker / VirtualBox
+If want to practice for or contribute to the [ICPC](https://icpc.foundation) regional contests which runs on [katts](https://open.kattis.com), then you need to make sure your code builds and runs as expected.  This project makes that easy using containers runing on docker.
 
-To create a dev environment with the proper compilers, verifiers,
-and tex components, this setup uses docker (Docker CE is fine) to create a single large docker container with the required components, and some simple wrapper scripts that lets you run them from your own environment (mac, win, linux) to maintain a consistent environment for judges.
+## Problem Solver
 
-***WARNING*** Docker used to be a build-once run anywhere environment, but it has fractured into a windows vs. linux docker-container versions.  ***Get the VirtualBox based version*** because you want a linux VirtualBox-hosted docker-container.  This also means you need to disable Hyper-V in windows for these containers to work.
-## Setup (Local Option - slower, but all yours)
+Welcome! Use the `--slim` setup option below.  You don't need the validator or latex tools.  Only the -slim and -web tests should pass with `tests/all`.
 
-Run `bin/setup --build` from the docker command line.
+## Problem Contributor.
 
-*Warning* this is slow (perhaps an hour) to create the required large container.  The good news is you only need to do this once.  But get it before going to bed.
+Thanks! Use the `--fat` (default) option below.  You do need the validator and latex tools.  All the tests should pass with `tests/all`.
 
-On a linux/mac, once you have the docker whale running, the terminal works just fine.
 
-On windows, there is "docker quickstart" that pops a command line tool that seems to work fine.
+## Setup
 
-## Setup (Remote Option - faster, default, trust my build)
+### Step 0 - Docker Toolbox
 
-Run `bin/setup` pulls the same container from Docker Hub (setup creates icpc/kattis:latest from `dockers/kattis/Dockerfile`, while setup uses icpc/kattis:latest from Docker Hub)
+You need Docker Toolbox [win](https://docs.docker.com/toolbox/toolbox_install_windows/)|[mac](https://docs.docker.com/toolbox/toolbox_install_mac/).  Or docker CE in [linux](https://docs.docker.com/install/).  Docker CE is a poor experience in windows, so don't do that.
+
+I assume you are running all commands from a terminal (max/linux) or a Docker CLI bash shell in windows.  Basically `echo $(pwd)` and `docker ps` should work.
+
+
+### Step 1 - Download ([tar](https://api.github.com/repos/icpc/kattis-docker/tarball/master)|[zip](https://api.github.com/repos/icpc/kattis-docker/zipball/master)), [fork](https://help.github.com/articles/fork-a-repo/) or [clone](https://help.github.com/articles/cloning-a-repository/) this repository.
+
+* Clone is a pretty good option, because then it's easy to update later with `git pull`
+* Fork is a pretty good option if you are a chief judge getting ready to make a new problem set for a contest, and want to make it easy to test for you and other judges.
+* Download is simple.
+
+### Step 2 - Setup
+
+In the root of this project directory in the docker shell from step 0, run setup.
+
+* `bin/setup` Full pulled setup (prebuilt downloads from docker hub)
+* `bin/setup --build` Build the containers locally.  Useful if you want a tweaked container.  Be patient.
+* `bin/setup --slim` Skip the fat container verification container (latex + compilers + problemtools) just have the slim (gcc, java, etc.) containers for the languages to compile and run code.
+
+You can redo this step as often as you want, but once per dev system should be enough unless there are updates to incorporate, like from a `git pull` of this repository.
 
 ## Use
 
-After setup, **NOTICE THE DOT** `. context` in project will set your path, while `. uncontext` resets it.
+After setup, **NOTICE THE DOT** `. context` in project will set your path, while `. uncontext` resets it.  
 
 After this, the dev tools,
 
 `make`,`g++`,`gcc`,`java`,`javac`,`python`,`python3`, `kotlin`, `kotlinc`
 
-the latex tools,
+the fat container (no `--slim`) provides
 
 `pdflatex`,`problem2pdf`,`problem2html`
 
@@ -44,9 +58,15 @@ and the kattis verification tool,
 
 map to running with the kattis container. The shell command
 
-`kattis-docker` command...
+```bash
 
-runs a comand within the kattis container (for example to execute a compiled executable).
+kattis-docker command args... # fat container (no --slim setup)
+gcc-docker command args... # gcc/g++/make/cmake
+java-docker command args... # java/kotlin
+python-docker command args... # python/pypy
+python3-docker command args... # python3
+
+```
 
 ## Tests
 
@@ -57,10 +77,5 @@ cd tests
 ./all
 ```
 
-should pass all tests.
-
-## Slim
-
-If you want to have access to the kattis compilers but don't want the verification/latex tools, `bin/setup --slim` and `bin/setup --slim --build` will create smaller compiler-specific containers (the commands like `javac` and `python` will be redirected to the appropriate container).  This can provide small test environments for contestants or judge testing hosts.
-
+should pass all tests (except the `*-kattis` tests with the slim setup).
 
