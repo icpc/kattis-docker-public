@@ -8,18 +8,18 @@ popd >/dev/null
 
 
 mktmps TMPDIR
-mkvars PYPY_VERSION
+mkvars PYPY_SLIM_VERSION
 
 cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/pypy-test.py" $TMPDIR
 
 cd $TMPDIR
 docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/python:latest /bin/bash -c "make pypy-test && ./pypy-test" > out
-if grep v${PYPY_VERSION} out
+if grep v${PYPY_SLIM_VERSION} out
 then
         echo ok
 else
-        echo "exected match to v${PYPY_VERSION} but got:"
+        echo "exected match to v${PYPY_SLIM_VERSION} but got:"
         cat out
         exit 1
 fi
