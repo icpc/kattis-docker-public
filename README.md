@@ -4,7 +4,7 @@
 
 The same ICPC test/run/build configuration that kattis.com uses for problem solvers and problem makers.
 
-If want to practice for or contribute to the [ICPC](https://icpc.foundation) regional contests which runs on [katts](https://open.kattis.com), then you need to make sure your code builds and runs as expected.  This project makes that easy using containers running on docker.
+If want to practice for or contribute to the [ICPC](https://icpc.foundation) regional contests which runs on [kattis](https://open.kattis.com), then you need to make sure your code builds and runs as expected.  This project makes that easy using containers running on docker.
 
 ## Problem Solver
 
@@ -18,7 +18,7 @@ Thanks! Use the `--fat` (default) option below.  You do need the validator and l
 
 ### Step 0 - Docker Toolbox
 
-You need Docker Toolbox [win](https://docs.docker.com/toolbox/toolbox_install_windows/)|[mac](https://docs.docker.com/toolbox/toolbox_install_mac/).  Or docker CE in [linux](https://docs.docker.com/install/).  Docker CE is a poor experience in windows, so don't do that.
+You need Docker Toolbox ([win](https://docs.docker.com/toolbox/toolbox_install_windows/)|[mac](https://docs.docker.com/toolbox/toolbox_install_mac/)).  Or docker CE in [linux](https://docs.docker.com/install/).  Docker CE is a poor experience in windows, so don't do that.
 
 I assume you are running all commands from a terminal (max/linux) or a Docker CLI bash shell in windows.  Basically `echo $(pwd)` and `docker ps` should work.
 
@@ -42,28 +42,39 @@ You can redo this step as often as you want, but once per dev system should be e
 
 After setup, **NOTICE THE DOT** `. context` in project will set your path, while `. uncontext` resets it.  
 
-After this, the dev tools,
+After setting the context, the dev tools,
 
-`make`,`g++`,`gcc`,`java`,`javac`,`python`,`python3`, `kotlin`, `kotlinc`
+`cmake`, `make`,`g++`,`gcc`,`java`,`javac`,`python`,`python3`, `kotlin`, `kotlinc`
 
-the fat container (no `--slim`) provides
+run in containers using the kattis version of these languages.  The default fat kattis setup (no `--slim` setup) also provides latex and problem verification tools:
 
-`pdflatex`,`problem2pdf`,`problem2html`
+`pdflatex`,`problem2pdf`,`problem2html`, `verifyproblem`
 
-and the kattis verification tool,
-
-`verifyproblem`
-
-map to running with the kattis container. The shell command
+You can run commands directly in a container as follows (for example, to execute a compiled target) with:
 
 ```bash
-
 kattis-docker command args... # fat container (no --slim setup)
 gcc-docker command args... # gcc/g++/make/cmake
 java-docker command args... # java/kotlin
 python-docker command args... # python/pypy
 python3-docker command args... # python3
+```
 
+There is a basic `Makefile` in `tests/compile` you can use as well, in that directory,
+
+```bash
+make gcc-test
+gcc-docker ./gcc-test
+```
+
+will compile and run using the kattis toolchain.  After setting your `. context` you should be able to copy the makefile to your build directory and just use it for building and testing single source file submissions.
+
+## Time
+
+Launching the docker adds time (about 1 second on my system) that is not part of time limits when being judged), so you should time inside the container:
+
+```bash
+gcc-docker time ./gcc-test
 ```
 
 ## Tests
