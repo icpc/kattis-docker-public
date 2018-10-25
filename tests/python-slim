@@ -14,7 +14,7 @@ cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/python-test.py" $TMPDIR
 
 cd $TMPDIR
-if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/python:latest /bin/bash -c "make python-test && ./python-test" | grep v${PYTHON_VERSION}
+if "$test_dir/../bin/python-docker" /bin/bash -c "make python-test && ./python-test" | grep v${PYTHON_VERSION}
 then
         echo "ok"
         exit 0

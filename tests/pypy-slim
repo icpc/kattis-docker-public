@@ -14,7 +14,7 @@ cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/pypy-test.py" $TMPDIR
 
 cd $TMPDIR
-docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/python:latest /bin/bash -c "make pypy-test && ./pypy-test" > out
+"$test_dir/../bin/python-docker" /bin/bash -c "make pypy-test && ./pypy-test" > out
 if grep v${PYPY_SLIM_VERSION} out
 then
         echo ok

@@ -64,7 +64,7 @@ do
         fi
         tag="icpc/kattis:latest"
     else
-        tag="icpc/kattis/$container:latest"
+        tag="icpc/kattis:$container-slim"
     fi
 
     if [ "$build" = "true" ]

@@ -14,7 +14,7 @@ cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/JavaTest.java" $TMPDIR
 
 cd $TMPDIR
-if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/java:latest /bin/bash -c "make JavaTest && ./JavaTest" | grep v${JAVA_VERSION}
+if "$test_dir/../bin/java-docker" /bin/bash -c "make JavaTest && ./JavaTest" | grep v${JAVA_VERSION}
 then
         echo ok
         exit 0
