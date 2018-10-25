@@ -1,5 +1,22 @@
 #!/bin/bash
 
+build=false
+pull=true
+slim=false
+fat=true
+
+while [ $# -gt 0 ]
+do
+    case "$1"
+    in
+        --build) build=true; pull=false; shift;;
+        --pull) build=false; pull=true; shift;;        
+        --slim)  slim=true; fat=false; shift;;
+        --fat)  slim=false; fat=true; shift;;        
+        *) echo "usage: setup <--build|--pull> <--slim|--fat>"; exit 1;;
+    esac
+done
+
 get_script_dir () {
     pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
     pwd
@@ -37,27 +54,39 @@ then
     exit 1
 fi
 
-for build in kattis gcc java python python3
+for container in kattis gcc java python python3
 do
-    if [ "$build" = "kattis" ]
+    if [ "$container" = "kattis" ]
     then
+        if [ "$fat" = "false" ]
+        then
+            continue
+        fi
         tag="icpc/kattis:latest"
-        
     else
-        tag="icpc/kattis/$build:latest"
+        tag="icpc/kattis/$container:latest"
     fi
 
-    if [ "$1" != "--build" ]
+    if [ "$build" = "true" ]
     then
-        docker pull $tag
+        docker build -t $tag "$BASE_DIR/dockers/$container"
     else
-        docker build -t $tag "$BASE_DIR/dockers/$build"
+        docker pull $tag
     fi
 done
 
-commands kattis py3clean py3compile py3versions pybuild pyclean pycompile pydoc pydoc3 pygettext pygettext3 pypy pypyclean pypycompile pytest python python-config python2 python2-config python3 pyversions
-commands kattis c++ g++ cc gcc ld ranlib ar as nm make cmake
-commands kattis java javac jar
-commands kattis pdflatex ghostscript gs problem2html  problem2pdf verifyproblem
-commands kattis kotlin kotlinc kotlin-dce-js kotlinc-js kotlinc-jvm
+if [ "$fat" = "true" ]
+then
+    commands kattis py3clean py3compile py3versions pybuild pyclean pycompile pydoc pydoc3 pygettext pygettext3 pypy pypyclean pypycompile pytest python python-config python2 python2-config python3 pyversions
+    commands kattis c++ g++ cc gcc ld ranlib ar as nm make cmake
+    commands kattis java javac jar
+    commands kattis pdflatex ghostscript gs problem2html  problem2pdf verifyproblem
+    commands kattis kotlin kotlinc kotlin-dce-js kotlinc-js kotlinc-jvm
+else
+    commands python pypy pypyclean pypycompile pytest python python-config python2 python2-config pyversions
+    commands python3 python3 pytest3
+    commands gcc c++ g++ cc gcc ld ranlib ar as nm make cmake
+    commands java java javac jar
+    commands java kotlin kotlinc kotlin-dce-js kotlinc-js kotlinc-jvm
+fi
 echo "Type ". ./context" in the project base directory ($BASE_DIR) to set your PATH"

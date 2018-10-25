@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
+cd ..
+PARENT_DIR="$PWD"
+popd >/dev/null
+PARENT_NAME="$(basename "$PARENT_DIR")"
+parent_name="$(echo $PARENT_NAME | tr ' [:upper:]' '_[:lower:]')"
+
+docker run --rm -i --user="$(id -u):$(id -g)" -v "$PWD":/home -w /home icpc/kattis/java:latest "$@"
