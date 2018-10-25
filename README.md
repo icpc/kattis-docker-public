@@ -10,10 +10,9 @@ If want to practice for or contribute to the [ICPC](https://icpc.foundation) reg
 
 Welcome! Use the `--slim` setup option below.  You don't need the validator or latex tools.  Only the -slim and -web tests should pass with `tests/all`.
 
-## Problem Contributor.
+## Problem Contributor
 
 Thanks! Use the `--fat` (default) option below.  You do need the validator and latex tools.  All the tests should pass with `tests/all`.
-
 
 ## Setup
 
@@ -22,7 +21,6 @@ Thanks! Use the `--fat` (default) option below.  You do need the validator and l
 You need Docker Toolbox [win](https://docs.docker.com/toolbox/toolbox_install_windows/)|[mac](https://docs.docker.com/toolbox/toolbox_install_mac/).  Or docker CE in [linux](https://docs.docker.com/install/).  Docker CE is a poor experience in windows, so don't do that.
 
 I assume you are running all commands from a terminal (max/linux) or a Docker CLI bash shell in windows.  Basically `echo $(pwd)` and `docker ps` should work.
-
 
 ### Step 1 - Download ([tar](https://api.github.com/repos/icpc/kattis-docker/tarball/master)|[zip](https://api.github.com/repos/icpc/kattis-docker/zipball/master)), [fork](https://help.github.com/articles/fork-a-repo/) or [clone](https://help.github.com/articles/cloning-a-repository/) this repository.
 
@@ -70,11 +68,10 @@ python3-docker command args... # python3
 
 ## Tests
 
-After setup
+After setup,
 
 ```bash
 tests/all
 ```
 
 should pass all tests (except the `*-kattis` tests with the slim setup).
-
