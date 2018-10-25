@@ -59,3 +59,8 @@ cd tests
 
 should pass all tests.
 
+## Slim
+
+If you want to have access to the kattis compilers but don't want the verification/latex tools, `bin/setup --slim` and `bin/setup --slim --build` will create smaller compiler-specific containers (the commands like `javac` and `python` will be redirected to the appropriate container).  This can provide small test environments for contestants or judge testing hosts.
+
+
