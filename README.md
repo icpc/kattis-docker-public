@@ -6,7 +6,7 @@ The same ICPC test/run/build configuration that kattis.com uses for problem solv
 
 If want to practice for or contribute to the [ICPC](https://icpc.foundation) regional contests which runs on [kattis](https://open.kattis.com), then you need to make sure your code builds and runs as expected.  This project makes that easy using containers running on docker.
 
-(intro video)[https://www.youtube.com/watch?v=BhHuNOczXzg]
+[intro video](https://www.youtube.com/watch?v=BhHuNOczXzg)
 
 ## Problem Solver
 
