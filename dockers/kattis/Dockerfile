@@ -42,7 +42,7 @@ RUN apt update && aptitude install -y \
 
 # java
 RUN apt update && aptitude install -y \
-    openjdk-8-jdk=8u181-b13-0ubuntu0.18.04.1
+    openjdk-8-jdk
 
 # kotlin
 RUN apt install -y zip
