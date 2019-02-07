@@ -42,7 +42,7 @@ RUN apt update && aptitude install -y \
 
 # java
 RUN apt update && aptitude install -y \
-    openjdk-8-jdk
+    openjdk-10-jdk
 
 # kotlin
 RUN apt install -y zip
