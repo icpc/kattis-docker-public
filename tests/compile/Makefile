@@ -27,19 +27,23 @@ null:
 
 % : %.java
 	javac -encoding UTF-8 -sourcepath . -d . $<
-	if ! egrep ^package $< ; then \
+	@if ! egrep ^package $< ; then \
 		echo "#!/bin/sh\njava $(JAVAFLAGS) -cp . $*" >$@ && chmod +x $@ ; \
 	else \
 		PKG=$$(egrep '^[ 	]*package [-a-z.0-9]+' $< | head -1 | sed -e 's/.*package[ 	]*\([a-z0-9.]*\).*/\1/') && echo "#!/bin/sh\njava $(JAVAFLAGS) -cp . $$PKG.$*" >$@ && chmod +x $@ ; \
 	fi
+	@echo -n "run: "
+	@tail -1 "$@"
 
 % : %.kt
 	kotlinc -d . $<
-	if ! egrep ^package $< ; then \
+	@if ! egrep ^package $< ; then \
 		echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlinc/lib/*:.' $*Kt" >$@ && chmod +x $@ ; \
 	else \
 		PKG=$$(egrep '^[ 	]*package [-a-z.0-9]+' $< | head -1 | sed -e 's/.*package[ 	]*\([a-z0-9.]*\).*/\1/') && echo "#!/bin/sh\njava $(JAVAFLAGS) -cp '/usr/local/kotlinc/lib/*:.' $$PKG.$*Kt" >$@ && chmod +x $@ ; \
 	fi
+	@echo -n "run: "
+	@tail -1 "$@"
 
 % : %.py
 	cp $< $@
