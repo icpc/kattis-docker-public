@@ -14,7 +14,7 @@ cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/JavaTest.java" $TMPDIR
 
 cd $TMPDIR
-TEST_JAVA_VERSION=$("$test_dir/../bin/java-docker" /bin/bash -c "make JavaTest >/dev/null && ./JavaTest ")
+TEST_JAVA_VERSION=$("$test_dir/../bin/java-docker" /bin/bash -c "make JavaTest && ./JavaTest ")
 if echo "$TEST_JAVA_VERSION" | grep v${JAVA_VERSION}
 then
         echo ok
