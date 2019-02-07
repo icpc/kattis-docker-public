@@ -34,7 +34,7 @@ RUN apt update && aptitude install -y \
 RUN apt update && aptitude install -y \
     python-pytest \
     python \
-    python3=3.6.5-3ubuntu1 \
+    python3.6 \
     python-pip \
     python-yaml  \
     pypy=5.10.0+dfsg-3build2 \
