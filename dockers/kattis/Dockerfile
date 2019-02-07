@@ -41,8 +41,7 @@ RUN apt update && aptitude install -y \
     tidy
 
 # java
-RUN apt update && aptitude install -y \
-    openjdk-10-jdk
+RUN curl -L -o /tmp/java.tar.gz https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz && cd /usr/local && tar zxf /tmp/java.tar.gz && cd /usr/local/bin && ln -s ../jdk*/bin/* .
 
 # kotlin
 RUN apt install -y zip
