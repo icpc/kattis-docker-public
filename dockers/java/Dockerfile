@@ -6,7 +6,7 @@ RUN apk add --no-cache curl zip
 
 RUN cd /tmp && curl -L -o kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && unzip kotlinc.zip
 
-FROM openjdk:11.0.2-slim
+FROM openjdk:10.0.2-slim
 
 COPY --from=0 /tmp/kotlinc /usr/local/kotlinc
 RUN cd /usr/local/bin && ln -s ../kotlinc/bin/* .
