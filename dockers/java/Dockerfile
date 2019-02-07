@@ -1,6 +1,6 @@
 FROM alpine
 
-ENV KOTLIN_VERSION 1.1.4
+ENV KOTLIN_VERSION 1.3.0
 
 RUN apk add --no-cache curl zip
 

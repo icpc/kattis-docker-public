@@ -46,7 +46,7 @@ RUN apt update && aptitude install -y \
 
 # kotlin
 RUN apt install -y zip
-ENV KOTLIN_VERSION 1.1.4
+ENV KOTLIN_VERSION 1.3.0
 # newer installs
 # RUN curl -L -o /tmp/kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}-linux-x64.zip && cd /usr/local && unzip /tmp/kotlinc.zip && cd /usr/local/bin && ln -s ../kotlinc/bin/* .
 

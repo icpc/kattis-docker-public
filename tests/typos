@@ -6,4 +6,5 @@ do
   run_type="$run_type && type $cmd"
 done
 
-docker run --rm -it icpc/kattis:latest /bin/bash -c "$run_type || echo 'missing commands'"
+docker run --rm -i icpc/kattis:latest /bin/bash -c "$run_type || echo 'missing commands'"
+
