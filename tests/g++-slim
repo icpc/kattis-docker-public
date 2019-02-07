@@ -14,7 +14,7 @@ cp "$test_dir/compile/Makefile" $TMPDIR
 cp "$test_dir/compile/g++-test.cpp" $TMPDIR
 
 cd $TMPDIR
-if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis/gcc:latest /bin/bash -c "make g++-test && ./g++-test" | grep v${GXX_VERSION}
+if docker run -v "$TMPDIR:/usr/src/myapp" --rm icpc/kattis:gcc-slim /bin/bash -c "make g++-test && ./g++-test" | grep v${GXX_VERSION}
 then
         echo ok
         exit 0

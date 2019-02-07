@@ -5,10 +5,10 @@ function mktmps {
     local var
     for var in "$@"
     do 
-      local TAG=$(bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1)
+      local TAG=$(dd bs=1024 count=1 if=/dev/urandom of=- 2>/dev/null | openssl sha -sha256 | tail -1 | sed -e 's/(stdin)= //')
       local TMP="$test_dir/tmp/$TAG"
       mkdir -p "$TMP"
-      TMPDIRS+=("$TMP")
+      TM3PDIRS+=("$TMP")
       eval $var="$TMP"
     done
 }
