@@ -69,9 +69,15 @@ do
 
     if [ "$build" = "true" ]
     then
-        docker build -t $tag "$BASE_DIR/dockers/$container"
+        if ! docker build -t $tag "$BASE_DIR/dockers/$container"
+	then
+	    echo "there were errors building $tag"
+	fi
     else
-        docker pull $tag
+        if ! docker pull $tag
+	then
+	    echo "there were errors pulling $tag"
+	fi
     fi
 done
 
