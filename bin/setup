@@ -33,16 +33,18 @@ commands () {
     local command=""
     shift
     pushd "$BASE_DIR/bin" > /dev/null
+    if [ ! -f .gitignore ]
+    then
+	touch .gitignore
+    fi
     for command in "$@"
     do
         recommand=${command//+/\\+}        
         /bin/rm -rf "$command"
         ln -s "$container-command" "$command"
         chmod +x "$command"
-        if test -f .gitignore && egrep -q "^$recommand"'$' .gitignore
+        if ! egrep -q "^$recommand"'$' .gitignore
 	then
-	    true
-	else
             echo "$command" >> .gitignore
         fi
     done

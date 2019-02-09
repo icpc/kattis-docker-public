@@ -87,7 +87,7 @@ else
     git_address=https://github.com/icpc/kattis-docker
 fi
 
-echo ./clean-build-test-all.sh --branch="$branch" --keep="$keep" --tmp="$tmp"  2>&1 | tee -a clone-build-test.log
+echo ./clone-build-test --branch="$branch" --keep="$keep" --tmp="$tmp"  2>&1 | tee -a clone-build-test.log
 
 echo git clone --single-branch --branch "$branch" $git_address 2>&1 | tee -a clone-build-test.log
 
@@ -116,5 +116,5 @@ then
     exit 1
 fi
 
-echo "clean-build-test-all.sh complete." 2>&1 | tee -a clone-build-test.log
+echo "./clone-build-test complete." 2>&1 | tee -a clone-build-test.log
 
