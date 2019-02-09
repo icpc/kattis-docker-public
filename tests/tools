@@ -8,7 +8,7 @@ function mktmps {
       local TAG=$(dd bs=1024 count=1 if=/dev/urandom of=/dev/stdout 2>/dev/null | openssl sha256 | tail -1 | sed -e 's/(stdin)= //')
       local TMP="$test_dir/tmp/$TAG"
       mkdir -p "$TMP"
-      TM3PDIRS+=("$TMP")
+      TMPDIRS+=("$TMP")
       eval $var="$TMP"
     done
 }

@@ -43,7 +43,7 @@ else
 fi
 
 function cleanup {
-    if [ -f "$TMP_DIR/clean-build-test-all.log" -a -f "$TMP_DIR/kattis-docker/.git" ]
+    if [ -f "$TMP_DIR/clean-build-test-all.log" -a -d "$TMP_DIR/kattis-docker/.git" ]
     then
 	echo "saving log to test branch."
 	cd "$TMP_DIR/kattis-docker"
@@ -53,7 +53,7 @@ function cleanup {
 	fi
 	git checkout test
 	cp ../clean-build-test-all.log .
-	git add clean-build-test-all.log
+	git add -f clean-build-test-all.log
 	git commit -m "test"
 	git push --set-upstream origin test
     fi

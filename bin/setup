@@ -39,8 +39,10 @@ commands () {
         /bin/rm -rf "$command"
         ln -s "$container-command" "$command"
         chmod +x "$command"
-        if ! test -f .gitignore && egrep -q "^$recommand"'$' .gitignore
+        if test -f .gitignore && egrep -q "^$recommand"'$' .gitignore
 	then
+	    true
+	else
             echo "$command" >> .gitignore
         fi
     done

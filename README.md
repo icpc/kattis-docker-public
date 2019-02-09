@@ -88,3 +88,25 @@ tests/all
 ```
 
 should pass all tests (except the `*-kattis` tests with the slim setup).
+
+## Dev (devlopers of these tools, not users of these tools)
+
+To set this up for dev/testing on ubuntu 18.04:
+
+Setup docker: https://docs.docker.com/install/linux/docker-ce/ubuntu/
+
+Add the current user to the docker group:
+
+```bash
+sudo usermod -a -G docker $USER
+```
+
+1 2 * * 3
+
+clean-build-test-all.sh 
+./clean-build-test-all.sh --branch=master
+
+
+
+
+
