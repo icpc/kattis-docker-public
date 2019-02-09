@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# clean-build-test-all.sh [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false]
+# clean-build-test-all.sh [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false] [--help]
 #
 
 tmp=""
@@ -15,8 +15,10 @@ do
     in
 	--tmp=*)    tmp=${arg#--tmp=};;
 	--branch=*) branch=${arg#--branch=};;
-	--keep=*)   keep=${arg#--keep=};;	
-	*) break;
+	--keep=*)   keep=${arg#--keep=};;
+	*)
+	    echo "usage $0 [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false] [--help]"
+	    exit 1
     esac
     shift
 done
@@ -48,8 +50,6 @@ then
 fi
 
 cd kattis-docker
-
-ok=true
 
 if ! bin/setup --build
 then
