@@ -34,7 +34,7 @@ trap cleanup EXIT
 
 cd $TMP_DIR
 
-sudo -u $KATTIS_USER curl -LJO -o clean-build-test-all.sh https://github.com/icpc/kattis-docker/raw/master/clean-build-test-all.sh
+sudo -u $KATTIS_USER curl -LJO -o clone-build-test https://github.com/icpc/kattis-docker/raw/master/bin/clone-build-test
 
-chmod +x clean-build-test-all.sh
-sudo -u $KATTIS_USER ./clean-build-test-all.sh
+chmod +x clone-build-test
+sudo -u $KATTIS_USER ./clone-build-test

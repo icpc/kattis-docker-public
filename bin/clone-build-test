@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# kattis-docker-cron-test.sh [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false] [--help]
+# clone-clean-build-test [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false] [--help]
 #
 
 pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
