@@ -101,7 +101,17 @@ Add the current user to the docker group:
 sudo usermod -a -G docker $USER
 ```
 
-1 2 * * 3
+If you want to run some tests:
+```bash
+tests/all --dryrun=false --pattern='.*' --issues=false
+```
 
-clean-build-test-all.sh 
-./clean-build-test-all.sh --branch=master
+If you want a full test
+```
+bin/clone-build-test --branch=master --tmp='' --keep=false
+```
+
+If you want to run automatic tests:
+```bash
+sudo cp bin/kattis-docker-cron /etc/cron.weekly
+```
