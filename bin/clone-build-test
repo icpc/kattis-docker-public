@@ -47,17 +47,21 @@ fi
 function cleanup {
     if [ -f "$TMP_DIR/clean-build-test-all.log" -a -d "$TMP_DIR/kattis-docker/.git" ]
     then
-	echo "saving log to test branch."
+	echo "saving log to test-$branch branch."
 	cd "$TMP_DIR/kattis-docker"
-	if ! git branch -a | egrep '^ *(remotes/origin/)?test$'
+	if ! git branch -a | egrep '^ *(remotes/origin/)?test-'$branch'$'
 	then
-	    git branch test
+	    git branch test-$branch
 	fi
-	git checkout test
+	git checkout test-$branch
+	if ! git pull origin test-$branch
+	then
+	    echo "pull failed (empty?)"
+	fi
 	cp ../clean-build-test-all.log .
 	git add -f clean-build-test-all.log
 	git commit -m "test"
-	git push --set-upstream origin test
+	git push --set-upstream origin test-$branch
     fi
     
     if [ "$keep" != "true" ]
