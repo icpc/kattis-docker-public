@@ -17,7 +17,7 @@ do
 	--branch=*) branch=${arg#--branch=};;
 	--keep=*)   keep=${arg#--keep=};;
 	*)
-	    echo "usage $0 [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false] [--help]"
+	    echo "usage $0 [--branch=master] [--tmp=$(mktemp -d)] [--keep=false] [--help]"
 	    exit 1
     esac
     shift
