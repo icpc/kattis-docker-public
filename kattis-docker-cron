@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+TAG=$(dd bs=1024 count=1 if=/dev/urandom of=/dev/stdout 2>/dev/null | openssl sha256 | tail -1 | sed -e 's/(stdin)= //')
+
+if [ "$(uname)" = "Darwin" ]
+then
+    KATTIS_DOCKER_DIR="$(echo /Users/*/projects/kattis-docker)"
+    KATTIS_USER="${KATTIS_DOCKER_DIR#/Users/}"
+    KATTIS_USER="${KATTIS_USER%/projects/kattis-docker}"
+else
+    KATTIS_DOCKER_DIR="$(echo /home/*/projects/kattis-docker)"
+    KATTIS_USER="${KATTIS_DOCKER_DIR#/home/}"
+    KATTIS_USER="${KATTIS_USER%/projects/kattis-docker}"
+fi
+
+if [ ! -d "$KATTIS_DOCKER_DIR" ]
+then
+    echo "could not determine install user."
+    exit 1
+fi
+
+TMP_DIR="$KATTIS_DOCKER_DIR/tmp.$TAG"
+mkdir "$TMP_DIR"
+echo chown $KATTIS_USER "$TMP_DIR"
+chown $KATTIS_USER "$TMP_DIR"
+
+function cleanup {
+    echo /bin/rm -rf "$TMP_DIR"
+}
+
+trap cleanup EXIT
+
+cd $TMP_DIR
+
+sudo -u $KATTIS_USER curl -LJO -o clean-build-test-all.sh https://github.com/icpc/kattis-docker/raw/master/clean-build-test-all.sh
+
+chmod +x clean-build-test-all.sh
+sudo -u $KATTIS_USER ./clean-build-test-all.sh
