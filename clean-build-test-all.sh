@@ -8,6 +8,8 @@ pushd $(dirname "${BASH_SOURCE[0]}") >/dev/null
 proj_dir="$PWD"
 popd >/dev/null
 
+cd "$proj_dir"
+
 tmp=""
 branch="master"
 keep="false"
