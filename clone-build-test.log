@@ -1,6 +1,6 @@
-Linux psmy4ptg0 4.15.0-43-generic #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
-TMP_DIR=/home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345
-./clean-build-test-all.sh --branch=master --keep=false --tmp=
+Darwin M-wmacevoy 18.2.0 Darwin Kernel Version 18.2.0: Thu Dec 20 20:46:53 PST 2018; root:xnu-4903.241.1~1/RELEASE_X86_64 x86_64
+TMP_DIR=/Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b
+./clone-build-test --branch=master --keep=false --tmp=
 git clone --single-branch --branch master git@github.com:icpc/kattis-docker.git
 Cloning into 'kattis-docker'...
 kattis-docker/bin/setup --build
@@ -19,13 +19,13 @@ kattis-docker/bin/setup --build
 ++ pushd kattis-docker/bin
 ++ pwd
 ++ popd
-+ THIS_DIR=/home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-++ dirname /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ BASE_DIR=/home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker
-++ basename /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker
++ THIS_DIR=/Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
+++ dirname /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ BASE_DIR=/Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker
+++ basename /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker
 + BASE_NAME=kattis-docker
-++ tr ' [:upper:]' '_[:lower:]'
 ++ echo kattis-docker
+++ tr ' [:upper:]' '_[:lower:]'
 + base_name=kattis-docker
 + which docker
 + for container in kattis gcc java python python3
@@ -33,316 +33,299 @@ kattis-docker/bin/setup --build
 + '[' true = false ']'
 + tag=icpc/kattis:latest
 + '[' true = true ']'
-+ docker build -t icpc/kattis:latest /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/dockers/kattis
++ docker build -t icpc/kattis:latest /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/dockers/kattis
 Sending build context to Docker daemon  4.096kB
 Step 1/17 : FROM ubuntu:18.04
  ---> 47b19964fb50
 Step 2/17 : ENV DEBIAN_FRONTEND noninteractive
  ---> Using cache
- ---> bc21e0757289
+ ---> 49a3b6d36845
 Step 3/17 : RUN apt-get update
  ---> Using cache
- ---> 31cd5b3e4120
+ ---> 26f3bc64118d
 Step 4/17 : RUN apt-get install -y --no-install-recommends     apt-transport-https     ca-certificates     curl     software-properties-common
  ---> Using cache
- ---> 8e72615760b7
+ ---> d5bb1ce8d779
 Step 5/17 : RUN apt-get install -y aptitude
  ---> Using cache
- ---> 2d4ce2d822ad
+ ---> 3128be78a3c3
 Step 6/17 : RUN apt update && aptitude install -y     automake     autoconf     autotools-dev     build-essential     cmake     debhelper     dh-python     git     gcc-7=7.3.0-16ubuntu3     libboost-regex-dev     libgmp-dev     libgmp3-dev
  ---> Using cache
- ---> 07dfcdda8bad
+ ---> 3c35b23bf2b5
 Step 7/17 : RUN apt update && aptitude install -y     python-pytest     python     python3.6     python-pip     python-yaml      pypy=5.10.0+dfsg-3build2     tidy
  ---> Using cache
- ---> 162ce76640eb
+ ---> 6c6d52c9aa30
 Step 8/17 : RUN curl -L -o /tmp/java.tar.gz https://download.java.net/java/GA/jdk10/10.0.2/19aef61b38124481863b1413dce1855f/13/openjdk-10.0.2_linux-x64_bin.tar.gz && cd /usr/local && tar zxf /tmp/java.tar.gz && cd /usr/local/bin && ln -s ../jdk*/bin/* .
  ---> Using cache
- ---> f71f360a0225
+ ---> 4e1d04f7667a
 Step 9/17 : RUN apt install -y zip
  ---> Using cache
- ---> 1e106a11dae1
+ ---> ac1b0a584ef1
 Step 10/17 : ENV KOTLIN_VERSION 1.3.0
  ---> Using cache
- ---> 499dce429d02
+ ---> 8f738aaba3fc
 Step 11/17 : RUN curl -L -o /tmp/kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && cd /usr/local && unzip /tmp/kotlinc.zip && cd /usr/local/bin && ln -s ../kotlinc/bin/* .
  ---> Using cache
- ---> eeea93c1bf20
+ ---> 3d12c6408d2a
 Step 12/17 : RUN apt update && aptitude install -y     ghostscript     python-plastex     texlive-generic-recommended     texlive-fonts-recommended     texlive-lang-cyrillic     texlive-latex-extra     texlive-latex-recommended
  ---> Using cache
- ---> 0f2bf5813aab
+ ---> aeb4667fd941
 Step 13/17 : RUN mkdir -p /usr/local && cd /usr/local && git clone --recursive https://github.com/kattis/problemtools
  ---> Using cache
- ---> 16fbc9b53d8a
+ ---> 40f14812dafc
 Step 14/17 : RUN cd /usr/local/problemtools && make builddeb
  ---> Using cache
- ---> 92391fcd1835
+ ---> 716f1f302efe
 Step 15/17 : RUN dpkg -i /usr/local/kattis-problemtools_*.deb
  ---> Using cache
- ---> 6c4c4a77133c
+ ---> e7e8769b855e
 Step 16/17 : WORKDIR /usr/src/myapp
  ---> Using cache
- ---> 02613423ddaa
+ ---> 4b927edaba13
 Step 17/17 : VOLUME /usr/src/myapp
  ---> Using cache
- ---> f589d6520392
-Successfully built f589d6520392
+ ---> 23ca383d599c
+Successfully built 23ca383d599c
 Successfully tagged icpc/kattis:latest
 + for container in kattis gcc java python python3
 + '[' gcc = kattis ']'
 + tag=icpc/kattis:gcc-slim
 + '[' true = true ']'
-+ docker build -t icpc/kattis:gcc-slim /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/dockers/gcc
++ docker build -t icpc/kattis:gcc-slim /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/dockers/gcc
 Sending build context to Docker daemon  2.048kB
 Step 1/4 : FROM gcc:7.3.0
  ---> c73fc3aa8615
 Step 2/4 : RUN apt-get update && apt-get install -y cmake time
  ---> Using cache
- ---> 63333ecc0524
+ ---> bb7a0cbbf902
 Step 3/4 : WORKDIR /usr/src/myapp
  ---> Using cache
- ---> 41be8c85e5c2
+ ---> ef81437043a4
 Step 4/4 : VOLUME /usr/src/myapp
  ---> Using cache
- ---> 50156f0eab89
-Successfully built 50156f0eab89
+ ---> cf061ee1a060
+Successfully built cf061ee1a060
 Successfully tagged icpc/kattis:gcc-slim
 + for container in kattis gcc java python python3
 + '[' java = kattis ']'
 + tag=icpc/kattis:java-slim
 + '[' true = true ']'
-+ docker build -t icpc/kattis:java-slim /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/dockers/java
++ docker build -t icpc/kattis:java-slim /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/dockers/java
 Sending build context to Docker daemon  2.048kB
 Step 1/10 : FROM alpine
  ---> caf27325b298
 Step 2/10 : ENV KOTLIN_VERSION 1.3.0
  ---> Using cache
- ---> d2f77c23cf5d
+ ---> 83b1b61a6e77
 Step 3/10 : RUN apk add --no-cache curl zip
  ---> Using cache
- ---> eb13e81fdfbc
+ ---> 82cb3b0ade23
 Step 4/10 : RUN cd /tmp && curl -L -o kotlinc.zip https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip && unzip kotlinc.zip
  ---> Using cache
- ---> ffbb95305958
+ ---> 213dc0bf69b0
 Step 5/10 : FROM openjdk:10.0.2-slim
  ---> 02f0ec2751d2
 Step 6/10 : COPY --from=0 /tmp/kotlinc /usr/local/kotlinc
  ---> Using cache
- ---> bee136c1e762
+ ---> c01559fac046
 Step 7/10 : RUN cd /usr/local/bin && ln -s ../kotlinc/bin/* .
  ---> Using cache
- ---> 145c9bd53f94
+ ---> 4dc334873ccc
 Step 8/10 : RUN apt-get update && apt-get install -y make time
  ---> Using cache
- ---> 8eb79085c750
+ ---> f1b93272c867
 Step 9/10 : WORKDIR /usr/src/myapp
  ---> Using cache
- ---> 6ebb516e7698
+ ---> 00c3f54234f3
 Step 10/10 : VOLUME /usr/src/myapp
  ---> Using cache
- ---> c231ae1c95da
-Successfully built c231ae1c95da
+ ---> f62038428d8e
+Successfully built f62038428d8e
 Successfully tagged icpc/kattis:java-slim
 + for container in kattis gcc java python python3
 + '[' python = kattis ']'
 + tag=icpc/kattis:python-slim
 + '[' true = true ']'
-+ docker build -t icpc/kattis:python-slim /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/dockers/python
++ docker build -t icpc/kattis:python-slim /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/dockers/python
 Sending build context to Docker daemon  2.048kB
 Step 1/4 : FROM pypy:2-5.10-slim
  ---> 1481de414713
 Step 2/4 : RUN apt-get update && apt-get install -y make time python
  ---> Using cache
- ---> f1f55e0eb20b
+ ---> f1571b385e19
 Step 3/4 : WORKDIR /usr/src/myapp
  ---> Using cache
- ---> 934faf263c67
+ ---> 22d53aecb280
 Step 4/4 : VOLUME /usr/src/myapp
  ---> Using cache
- ---> 5cbcde459d3d
-Successfully built 5cbcde459d3d
+ ---> dd357a53d263
+Successfully built dd357a53d263
 Successfully tagged icpc/kattis:python-slim
 + for container in kattis gcc java python python3
 + '[' python3 = kattis ']'
 + tag=icpc/kattis:python3-slim
 + '[' true = true ']'
-+ docker build -t icpc/kattis:python3-slim /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/dockers/python3
++ docker build -t icpc/kattis:python3-slim /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/dockers/python3
 Sending build context to Docker daemon  2.048kB
 Step 1/4 : FROM python:3.6-slim
  ---> 3d53ad4e4bb9
 Step 2/4 : RUN apt-get update && apt-get install -y make time
  ---> Using cache
- ---> bcda7d2f9217
+ ---> 03dbb8b6b34f
 Step 3/4 : WORKDIR /usr/src/myapp
  ---> Using cache
- ---> f2d844588bad
+ ---> 82f97da90076
 Step 4/4 : VOLUME /usr/src/myapp
  ---> Using cache
- ---> 28f9264c9727
-Successfully built 28f9264c9727
+ ---> 0036eab53d15
+Successfully built 0036eab53d15
 Successfully tagged icpc/kattis:python3-slim
 + '[' true = true ']'
 + commands kattis py3clean py3compile py3versions pybuild pyclean pycompile pydoc pydoc3 pygettext pygettext3 pypy pypyclean pypycompile pytest python python-config python2 python2-config python3 pyversions
 + local container=kattis
 + local command=
 + shift
-+ pushd /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ for command in "$@"
++ pushd /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ '[' '!' -f .gitignore ']'
++ touch .gitignore
++ for command in '"$@"'
 + recommand=py3clean
 + /bin/rm -rf py3clean
 + ln -s kattis-command py3clean
 + chmod +x py3clean
-+ test -f .gitignore
++ egrep -q '^py3clean$' .gitignore
 + echo py3clean
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=py3compile
 + /bin/rm -rf py3compile
 + ln -s kattis-command py3compile
 + chmod +x py3compile
-+ test -f .gitignore
 + egrep -q '^py3compile$' .gitignore
 + echo py3compile
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=py3versions
 + /bin/rm -rf py3versions
 + ln -s kattis-command py3versions
 + chmod +x py3versions
-+ test -f .gitignore
 + egrep -q '^py3versions$' .gitignore
 + echo py3versions
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pybuild
 + /bin/rm -rf pybuild
 + ln -s kattis-command pybuild
 + chmod +x pybuild
-+ test -f .gitignore
 + egrep -q '^pybuild$' .gitignore
 + echo pybuild
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pyclean
 + /bin/rm -rf pyclean
 + ln -s kattis-command pyclean
 + chmod +x pyclean
-+ test -f .gitignore
 + egrep -q '^pyclean$' .gitignore
 + echo pyclean
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pycompile
 + /bin/rm -rf pycompile
 + ln -s kattis-command pycompile
 + chmod +x pycompile
-+ test -f .gitignore
 + egrep -q '^pycompile$' .gitignore
 + echo pycompile
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pydoc
 + /bin/rm -rf pydoc
 + ln -s kattis-command pydoc
 + chmod +x pydoc
-+ test -f .gitignore
 + egrep -q '^pydoc$' .gitignore
 + echo pydoc
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pydoc3
 + /bin/rm -rf pydoc3
 + ln -s kattis-command pydoc3
 + chmod +x pydoc3
-+ test -f .gitignore
 + egrep -q '^pydoc3$' .gitignore
 + echo pydoc3
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pygettext
 + /bin/rm -rf pygettext
 + ln -s kattis-command pygettext
 + chmod +x pygettext
-+ test -f .gitignore
 + egrep -q '^pygettext$' .gitignore
 + echo pygettext
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pygettext3
 + /bin/rm -rf pygettext3
 + ln -s kattis-command pygettext3
 + chmod +x pygettext3
-+ test -f .gitignore
 + egrep -q '^pygettext3$' .gitignore
 + echo pygettext3
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pypy
 + /bin/rm -rf pypy
 + ln -s kattis-command pypy
 + chmod +x pypy
-+ test -f .gitignore
 + egrep -q '^pypy$' .gitignore
 + echo pypy
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pypyclean
 + /bin/rm -rf pypyclean
 + ln -s kattis-command pypyclean
 + chmod +x pypyclean
-+ test -f .gitignore
 + egrep -q '^pypyclean$' .gitignore
 + echo pypyclean
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pypycompile
 + /bin/rm -rf pypycompile
 + ln -s kattis-command pypycompile
 + chmod +x pypycompile
-+ test -f .gitignore
 + egrep -q '^pypycompile$' .gitignore
 + echo pypycompile
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pytest
 + /bin/rm -rf pytest
 + ln -s kattis-command pytest
 + chmod +x pytest
-+ test -f .gitignore
 + egrep -q '^pytest$' .gitignore
 + echo pytest
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=python
 + /bin/rm -rf python
 + ln -s kattis-command python
 + chmod +x python
-+ test -f .gitignore
 + egrep -q '^python$' .gitignore
 + echo python
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=python-config
 + /bin/rm -rf python-config
 + ln -s kattis-command python-config
 + chmod +x python-config
-+ test -f .gitignore
 + egrep -q '^python-config$' .gitignore
 + echo python-config
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=python2
 + /bin/rm -rf python2
 + ln -s kattis-command python2
 + chmod +x python2
-+ test -f .gitignore
 + egrep -q '^python2$' .gitignore
 + echo python2
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=python2-config
 + /bin/rm -rf python2-config
 + ln -s kattis-command python2-config
 + chmod +x python2-config
-+ test -f .gitignore
 + egrep -q '^python2-config$' .gitignore
 + echo python2-config
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=python3
 + /bin/rm -rf python3
 + ln -s kattis-command python3
 + chmod +x python3
-+ test -f .gitignore
 + egrep -q '^python3$' .gitignore
 + echo python3
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=pyversions
 + /bin/rm -rf pyversions
 + ln -s kattis-command pyversions
 + chmod +x pyversions
-+ test -f .gitignore
 + egrep -q '^pyversions$' .gitignore
 + echo pyversions
 + popd
@@ -350,93 +333,83 @@ Successfully tagged icpc/kattis:python3-slim
 + local container=kattis
 + local command=
 + shift
-+ pushd /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ for command in "$@"
++ pushd /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ '[' '!' -f .gitignore ']'
++ for command in '"$@"'
 + recommand='c\+\+'
 + /bin/rm -rf c++
 + ln -s kattis-command c++
 + chmod +x c++
-+ test -f .gitignore
 + egrep -q '^c\+\+$' .gitignore
 + echo c++
-+ for command in "$@"
++ for command in '"$@"'
 + recommand='g\+\+'
 + /bin/rm -rf g++
 + ln -s kattis-command g++
 + chmod +x g++
-+ test -f .gitignore
 + egrep -q '^g\+\+$' .gitignore
 + echo g++
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=cc
 + /bin/rm -rf cc
 + ln -s kattis-command cc
 + chmod +x cc
-+ test -f .gitignore
 + egrep -q '^cc$' .gitignore
 + echo cc
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=gcc
 + /bin/rm -rf gcc
 + ln -s kattis-command gcc
 + chmod +x gcc
-+ test -f .gitignore
 + egrep -q '^gcc$' .gitignore
 + echo gcc
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=ld
 + /bin/rm -rf ld
 + ln -s kattis-command ld
 + chmod +x ld
-+ test -f .gitignore
 + egrep -q '^ld$' .gitignore
 + echo ld
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=ranlib
 + /bin/rm -rf ranlib
 + ln -s kattis-command ranlib
 + chmod +x ranlib
-+ test -f .gitignore
 + egrep -q '^ranlib$' .gitignore
 + echo ranlib
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=ar
 + /bin/rm -rf ar
 + ln -s kattis-command ar
 + chmod +x ar
-+ test -f .gitignore
 + egrep -q '^ar$' .gitignore
 + echo ar
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=as
 + /bin/rm -rf as
 + ln -s kattis-command as
 + chmod +x as
-+ test -f .gitignore
 + egrep -q '^as$' .gitignore
 + echo as
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=nm
 + /bin/rm -rf nm
 + ln -s kattis-command nm
 + chmod +x nm
-+ test -f .gitignore
 + egrep -q '^nm$' .gitignore
 + echo nm
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=make
 + /bin/rm -rf make
 + ln -s kattis-command make
 + chmod +x make
-+ test -f .gitignore
 + egrep -q '^make$' .gitignore
 + echo make
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=cmake
 + /bin/rm -rf cmake
 + ln -s kattis-command cmake
 + chmod +x cmake
-+ test -f .gitignore
 + egrep -q '^cmake$' .gitignore
 + echo cmake
 + popd
@@ -444,29 +417,27 @@ Successfully tagged icpc/kattis:python3-slim
 + local container=kattis
 + local command=
 + shift
-+ pushd /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ for command in "$@"
++ pushd /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ '[' '!' -f .gitignore ']'
++ for command in '"$@"'
 + recommand=java
 + /bin/rm -rf java
 + ln -s kattis-command java
 + chmod +x java
-+ test -f .gitignore
 + egrep -q '^java$' .gitignore
 + echo java
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=javac
 + /bin/rm -rf javac
 + ln -s kattis-command javac
 + chmod +x javac
-+ test -f .gitignore
 + egrep -q '^javac$' .gitignore
 + echo javac
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=jar
 + /bin/rm -rf jar
 + ln -s kattis-command jar
 + chmod +x jar
-+ test -f .gitignore
 + egrep -q '^jar$' .gitignore
 + echo jar
 + popd
@@ -474,53 +445,48 @@ Successfully tagged icpc/kattis:python3-slim
 + local container=kattis
 + local command=
 + shift
-+ pushd /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ for command in "$@"
++ pushd /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ '[' '!' -f .gitignore ']'
++ for command in '"$@"'
 + recommand=pdflatex
 + /bin/rm -rf pdflatex
 + ln -s kattis-command pdflatex
 + chmod +x pdflatex
-+ test -f .gitignore
 + egrep -q '^pdflatex$' .gitignore
 + echo pdflatex
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=ghostscript
 + /bin/rm -rf ghostscript
 + ln -s kattis-command ghostscript
 + chmod +x ghostscript
-+ test -f .gitignore
 + egrep -q '^ghostscript$' .gitignore
 + echo ghostscript
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=gs
 + /bin/rm -rf gs
 + ln -s kattis-command gs
 + chmod +x gs
-+ test -f .gitignore
 + egrep -q '^gs$' .gitignore
 + echo gs
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=problem2html
 + /bin/rm -rf problem2html
 + ln -s kattis-command problem2html
 + chmod +x problem2html
-+ test -f .gitignore
 + egrep -q '^problem2html$' .gitignore
 + echo problem2html
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=problem2pdf
 + /bin/rm -rf problem2pdf
 + ln -s kattis-command problem2pdf
 + chmod +x problem2pdf
-+ test -f .gitignore
 + egrep -q '^problem2pdf$' .gitignore
 + echo problem2pdf
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=verifyproblem
 + /bin/rm -rf verifyproblem
 + ln -s kattis-command verifyproblem
 + chmod +x verifyproblem
-+ test -f .gitignore
 + egrep -q '^verifyproblem$' .gitignore
 + echo verifyproblem
 + popd
@@ -528,71 +494,81 @@ Successfully tagged icpc/kattis:python3-slim
 + local container=kattis
 + local command=
 + shift
-+ pushd /home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker/bin
-+ for command in "$@"
++ pushd /Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker/bin
++ '[' '!' -f .gitignore ']'
++ for command in '"$@"'
 + recommand=kotlin
 + /bin/rm -rf kotlin
 + ln -s kattis-command kotlin
 + chmod +x kotlin
-+ test -f .gitignore
 + egrep -q '^kotlin$' .gitignore
 + echo kotlin
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=kotlinc
 + /bin/rm -rf kotlinc
 + ln -s kattis-command kotlinc
 + chmod +x kotlinc
-+ test -f .gitignore
 + egrep -q '^kotlinc$' .gitignore
 + echo kotlinc
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=kotlin-dce-js
 + /bin/rm -rf kotlin-dce-js
 + ln -s kattis-command kotlin-dce-js
 + chmod +x kotlin-dce-js
-+ test -f .gitignore
 + egrep -q '^kotlin-dce-js$' .gitignore
 + echo kotlin-dce-js
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=kotlinc-js
 + /bin/rm -rf kotlinc-js
 + ln -s kattis-command kotlinc-js
 + chmod +x kotlinc-js
-+ test -f .gitignore
 + egrep -q '^kotlinc-js$' .gitignore
 + echo kotlinc-js
-+ for command in "$@"
++ for command in '"$@"'
 + recommand=kotlinc-jvm
 + /bin/rm -rf kotlinc-jvm
 + ln -s kattis-command kotlinc-jvm
 + chmod +x kotlinc-jvm
-+ test -f .gitignore
 + egrep -q '^kotlinc-jvm$' .gitignore
 + echo kotlinc-jvm
 + popd
-+ echo 'Type .' './context in the project base directory (/home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker) to set your PATH'
-Type . ./context in the project base directory (/home/paperspace/projects/kattis-docker/tmp.627857ad8d140dd6da7940027ed7e8a0431ab4412df983bcbfdcdc34eadd7a97/tmp.a054d6c938835984ad36adba53fd0e828dde2700fdf17652bb9cb686fa785345/kattis-docker) to set your PATH
++ echo 'Type .' './context in the project base directory (/Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker) to set your PATH'
+Type . ./context in the project base directory (/Users/wmacevoy/projects/kattis-docker/bin/tmp.d95774bd4b9823f8a789c0aec16d4c7f4c5f5ee9536ef3c4175545c75d75e36b/kattis-docker) to set your PATH
 . kattis-docker/context
 kattis-docker/tests/all
+./python3-kattis
+v3.6.7
+ok
+./python3-kattis passed
+./python-kattis
+v2.7.15rc1
+ok
+./python-kattis passed
 ./g++-slim
 v7.3.0
 ok
 ./g++-slim passed
-./gcc-kattis
-v7.3.0
-ok
-./gcc-kattis passed
-./java-web
+./python3-web
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 23469    0 23469    0     0  27906      0 --:--:-- --:--:-- --:--:-- 27906
-version 10.0.2 match.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0100 20274    0 20274    0     0  19512      0 --:--:--  0:00:01 --:--:-- 19531
+version 3.6 match.
 ok
-./java-web passed
-./kotlin-kattis
-v1.3.0
+./python3-web passed
+./g++-web
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   714    0   714    0     0    704      0 --:--:--  0:00:01 --:--:--   704100 22429    0 22429    0     0  21300      0 --:--:--  0:00:01 --:--:-- 21300
+g++ v7.3.0 documented.
 ok
-./kotlin-kattis passed
+./g++-web passed
+./kotlin-web
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 22056    0 22056    0     0  20498      0 --:--:--  0:00:01 --:--:-- 20498
+version 1.3.0 match.
+ok
+./kotlin-web passed
 ./typos
 ar is /usr/bin/ar
 as is /usr/bin/as
@@ -607,10 +583,10 @@ jar is /usr/local/bin/jar
 java is /usr/local/bin/java
 javac is /usr/local/bin/javac
 kotlin is /usr/local/bin/kotlin
+kotlin-dce-js is /usr/local/bin/kotlin-dce-js
 kotlinc is /usr/local/bin/kotlinc
 kotlinc-js is /usr/local/bin/kotlinc-js
 kotlinc-jvm is /usr/local/bin/kotlinc-jvm
-kotlin-dce-js is /usr/local/bin/kotlin-dce-js
 ld is /usr/bin/ld
 make is /usr/bin/make
 nm is /usr/bin/nm
@@ -632,36 +608,63 @@ pypyclean is /usr/bin/pypyclean
 pypycompile is /usr/bin/pypycompile
 pytest is /usr/bin/pytest
 python is /usr/bin/python
+python-config is /usr/bin/python-config
 python2 is /usr/bin/python2
 python2-config is /usr/bin/python2-config
 python3 is /usr/bin/python3
-python-config is /usr/bin/python-config
 pyversions is /usr/bin/pyversions
 ranlib is /usr/bin/ranlib
 verifyproblem is /usr/bin/verifyproblem
 ./typos passed
-./python3-web
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 20274    0 20274    0     0  25793      0 --:--:-- --:--:-- --:--:-- 25761
-version 3.6 match.
-ok
-./python3-web passed
 ./pypy-web
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0100 10550    0 10550    0     0   5916      0 --:--:--  0:00:01 --:--:--  5913100 20668    0 20668    0     0  11572      0 --:--:--  0:00:01 --:--:-- 11565
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0100 20668    0 20668    0     0  20105      0 --:--:--  0:00:01 --:--:-- 20105
 pypy version 5.10 match.
 ok
 ./pypy-web passed
-./python-slim
-v2.7.9
-ok
-./python-slim passed
 ./java-slim
 v10.0.2
 ok
 ./java-slim passed
+./gcc-kattis
+v7.3.0
+ok
+./gcc-kattis passed
+./python3-slim
+v3.6.8
+ok
+./python3-slim passed
+./java-web
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   714    0   714    0     0    623      0 --:--:--  0:00:01 --:--:--   623100 23469    0 23469    0     0  20372      0 --:--:--  0:00:01 --:--:-- 20372
+version 10.0.2 match.
+ok
+./java-web passed
+./python-slim
+v2.7.9
+ok
+./python-slim passed
+./kotlin-slim
+v1.3.0
+ok
+./kotlin-slim passed
+./pypy-kattis
+v5.10.0+dfsg-3build2
+ok
+./pypy-kattis passed
+./g++-kattis
+v7.3.0
+ok
+./g++-kattis passed
+./gcc-web
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   714    0   714    0     0    671      0 --:--:--  0:00:01 --:--:--   671100 20696    0 20696    0     0  19414      0 --:--:--  0:00:01 --:--:-- 19414
+gcc v7.3.0 documented.
+ok
+./gcc-web passed
 ./gcc-slim
 v7.3.0
 ok
@@ -670,61 +673,20 @@ ok
 v10.0.2
 ok
 ./java-kattis passed
-./pypy-kattis
-v5.10.0+dfsg-3build2
-ok
-./pypy-kattis passed
-./python3-slim
-v3.6.8
-ok
-./python3-slim passed
-./python-kattis
-v2.7.15rc1
-ok
-./python-kattis passed
-./kotlin-slim
+./kotlin-kattis
 v1.3.0
 ok
-./kotlin-slim passed
-./python3-kattis
-v3.6.7
-ok
-./python3-kattis passed
-./python-web
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 20668    0 20668    0     0  25899      0 --:--:-- --:--:-- --:--:-- 25867
-python version 2.7 match.
-ok
-./python-web passed
+./kotlin-kattis passed
 ./pypy-slim
 v0e7ea4fe15e8
 ok
 ./pypy-slim passed
-./kotlin-web
+./python-web
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 22056    0 22056    0     0  26163      0 --:--:-- --:--:-- --:--:-- 26132100 22056    0 22056    0     0  26132      0 --:--:-- --:--:-- --:--:-- 26101
-version 1.3.0 match.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   714    0   714    0     0    667      0 --:--:--  0:00:01 --:--:--   667100 20668    0 20668    0     0  19208      0 --:--:--  0:00:01 --:--:-- 19208
+python version 2.7 match.
 ok
-./kotlin-web passed
-./g++-web
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 22429    0 22429    0     0  27931      0 --:--:-- --:--:-- --:--:-- 27931
-g++ v7.3.0 documented.
-ok
-./g++-web passed
-./g++-kattis
-v7.3.0
-ok
-./g++-kattis passed
-./gcc-web
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 20696    0 20696    0     0  24875      0 --:--:-- --:--:-- --:--:-- 24845100 20696    0 20696    0     0  24815      0 --:--:-- --:--:-- --:--:-- 24785
-gcc v7.3.0 documented.
-ok
-./gcc-web passed
+./python-web passed
 all tests passed
-clean-build-test-all.sh complete.
+./clone-build-test complete.
