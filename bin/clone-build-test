@@ -45,7 +45,7 @@ else
 fi
 
 function cleanup {
-    if [ -f "$TMP_DIR/clean-build-test-all.log" -a -d "$TMP_DIR/kattis-docker/.git" ]
+    if [ -f "$TMP_DIR/clone-build-test.log" -a -d "$TMP_DIR/kattis-docker/.git" ]
     then
 	echo "saving log to test-$branch branch."
 	cd "$TMP_DIR/kattis-docker"
@@ -58,10 +58,11 @@ function cleanup {
 	then
 	    echo "pull failed (empty?)"
 	fi
-	cp ../clean-build-test-all.log .
-	git add -f clean-build-test-all.log
+	cp ../clone-build-test.log .
+	git add -f clone-build-test.log
 	git commit -m "test"
 	git push --set-upstream origin test-$branch
+	git checkout $branch
     fi
     
     if [ "$keep" != "true" ]
@@ -76,8 +77,8 @@ trap cleanup EXIT
 
 cd "$TMP_DIR"
 
-uname -a | tee -a clean-build-test-all.log
-echo "TMP_DIR=$TMP_DIR" 2>&1 | tee -a clean-build-test-all.log
+uname -a | tee -a clone-build-test.log
+echo "TMP_DIR=$TMP_DIR" 2>&1 | tee -a clone-build-test.log
 
 if [ "$ssh" = "true" ]
 then
@@ -86,33 +87,34 @@ else
     git_address=https://github.com/icpc/kattis-docker
 fi
 
-echo ./clean-build-test-all.sh --branch="$branch" --keep="$keep" --tmp="$tmp"  2>&1 | tee -a clean-build-test-all.log
+echo ./clean-build-test-all.sh --branch="$branch" --keep="$keep" --tmp="$tmp"  2>&1 | tee -a clone-build-test.log
 
-echo git clone --single-branch --branch "$branch" $git_address 2>&1 | tee -a clean-build-test-all.log
+echo git clone --single-branch --branch "$branch" $git_address 2>&1 | tee -a clone-build-test.log
 
-if ! git clone --single-branch --branch "$branch" $git_address 2>&1 | tee -a clean-build-test-all.log
+if ! git clone --single-branch --branch "$branch" $git_address 2>&1 | tee -a clone-build-test.log
 then
     echo "clone errors."
 fi
 
-echo kattis-docker/bin/setup --build 2>&1 | tee -a clean-build-test-all.log
+echo kattis-docker/bin/setup --build 2>&1 | tee -a clone-build-test.log
 
-if ! kattis-docker/bin/setup --build 2>&1 | tee -a clean-build-test-all.log
+if ! kattis-docker/bin/setup --build 2>&1 | tee -a clone-build-test.log
 then
-    echo "setup errors." 2>&1 | tee -a clean-build-test-all.log
+    echo "setup errors." 2>&1 | tee -a clone-build-test.log
     exit 1
 fi
 
-echo . kattis-docker/context 2>&1 | tee -a clean-build-test-all.log
+echo . kattis-docker/context 2>&1 | tee -a clone-build-test.log
 
 . kattis-docker/context
 
-echo kattis-docker/tests/all 2>&1 | tee -a clean-build-test-all.log
+echo kattis-docker/tests/all 2>&1 | tee -a clone-build-test.log
 
-if ! kattis-docker/tests/all 2>&1 | tee -a clean-build-test-all.log
+if ! kattis-docker/tests/all 2>&1 | tee -a clone-build-test.log
 then
-    echo "test errors." 2>&1 | tee -a clean-build-test-all.log
+    echo "test errors." 2>&1 | tee -a clone-build-test.log
     exit 1
 fi
 
-echo "clean-build-test-all.sh complete." 2>&1 | tee -a clean-build-test-all.log
+echo "clean-build-test-all.sh complete." 2>&1 | tee -a clone-build-test.log
+
