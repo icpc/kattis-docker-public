@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 build=false
 pull=true
@@ -39,8 +39,8 @@ commands () {
         /bin/rm -rf "$command"
         ln -s "$container-command" "$command"
         chmod +x "$command"
-        if ! egrep -q "^$recommand"'$' .gitignore
-        then
+        if ! test -f .gitignore && egrep -q "^$recommand"'$' .gitignore
+	then
             echo "$command" >> .gitignore
         fi
     done
