@@ -1,16 +1,21 @@
 #!/bin/bash
 
+#
+# clean-build-test-all.sh [--branch="master"] [--tmp=$(mktemp -d)] [--keep=false]
+#
+
 tmp=""
 branch="master"
 keep="false"
 
 while [ $# -gt 0 ]
 do
-    case "$1"
+    arg="$1"
+    case "$arg"
     in
-	--tmp=*)    tmp={1#--tmp=};;
-	--branch=*) branch={1#--branch=};;
-	--keep=*)   keep={1#--keep=};;	
+	--tmp=*)    tmp=${arg#--tmp=};;
+	--branch=*) branch=${arg#--branch=};;
+	--keep=*)   keep=${arg#--keep=};;	
 	*) break;
     esac
     shift
@@ -36,9 +41,9 @@ fi
 
 cd  "$TMP_DIR"
 
-if ! git clone git clone --single-branch --branch "$branch" https://github.com/icpc/kattis-docker
+if ! git clone --single-branch --branch "$branch" https://github.com/icpc/kattis-docker
 then
-    echo "clone errors"
+    echo "clone errors."
     exit 1
 fi
 
