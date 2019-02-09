@@ -30,6 +30,8 @@ function cleanup {
     echo /bin/rm -rf "$TMP_DIR"
 }
 
+trap cleanup EXIT
+
 cd $TMP_DIR
 
 sudo -u $KATTIS_USER curl -LJO -o clean-build-test-all.sh https://github.com/icpc/kattis-docker/raw/master/clean-build-test-all.sh
